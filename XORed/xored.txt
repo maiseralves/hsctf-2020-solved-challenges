@@ -1,0 +1,137 @@
+=====================================================
+XORed
+=====================================================
+I was given the following equations. Can you help me decode the flag?
+Key 1 = 5dcec311ab1a88ff66b69ef46d4aba1aee814fe00a4342055c146533
+Key 1 ^ Key 3 = 9a13ea39f27a12000e083a860f1bd26e4a126e68965cc48bee3fa11b
+Key 2 ^ Key 3 ^ Key 5 = 557ce6335808f3b812ce31c7230ddea9fb32bbaeaf8f0d4a540b4f05
+Key 1 ^ Key 4 ^ Key 5 = 7b33428eb14e4b54f2f4a3acaeab1c2733e4ab6bebc68436177128eb
+Key 3 ^ Key 4 = 996e59a867c171397fc8342b5f9a61d90bda51403ff6326303cb865a
+Flag ^ Key 1 ^ Key 2 ^ Key 3 ^ Key 4 ^ Key 5 = 306d34c5b6dda0f53c7a0f5a2ce4596cfea5ecb676169dd7d5931139
+
+Author: AC
+
+=====================================================
+Resolution
+=====================================================
+
+Online tools used to solve this chall:
+https://toolslick.com/math/bitwise/xor-calculator
+https://convertcase.net/pt/
+
+
+Definitions:
+A = Key 1
+B = Key 2
+C = Key 3
+D = Key 4
+E = Key 5
+F = Flag
+
+Equations:
+0) A ^ 0 ^ 0 ^ 0 ^ 0 ^ 0 = A
+1) A ^ C ^ 0 ^ 0 ^ 0 ^ 0 = AC
+2) B ^ C ^ E ^ 0 ^ 0 ^ 0 = BCE
+3) A ^ D ^ E ^ 0 ^ 0 ^ 0 = ADE
+4) C ^ D ^ 0 ^ 0 ^ 0 ^ 0 = CD
+5) F ^ A ^ B ^ C ^ D ^ E = FABCDE
+
+A      = 5dcec311ab1a88ff66b69ef46d4aba1aee814fe00a4342055c146533
+AC     = 9a13ea39f27a12000e083a860f1bd26e4a126e68965cc48bee3fa11b
+BCE    = 557ce6335808f3b812ce31c7230ddea9fb32bbaeaf8f0d4a540b4f05
+ADE    = 7b33428eb14e4b54f2f4a3acaeab1c2733e4ab6bebc68436177128eb
+CD     = 996e59a867c171397fc8342b5f9a61d90bda51403ff6326303cb865a
+FABCDE = 306d34c5b6dda0f53c7a0f5a2ce4596cfea5ecb676169dd7d5931139
+
+
+Solving the equations 1, 2, 3, 4, 5:
+
+Equation 1)
+A ^ C = AC
+AC = A xor C
+A xor AC = A xor (A xor C) --> Multiply by A in both side
+A xor AC = (A xor A) xor C --> Associative X ^ (Y ^ Z) = (X ^ Y) ^ Z and Self Inverse ( X ^ X = 0)
+A xor AC = 0 xor C --> Identity element (0 ^ D = D)
+A xor AC = C
+A = 5dcec311ab1a88ff66b69ef46d4aba1aee814fe00a4342055c146533
+AC = 9a13ea39f27a12000e083a860f1bd26e4a126e68965cc48bee3fa11b
+C = A xor AC = 5dcec311ab1a88ff66b69ef46d4aba1aee814fe00a4342055c146533 xor 9a13ea39f27a12000e083a860f1bd26e4a126e68965cc48bee3fa11b
+C = c7dd292859609aff68bea47262516874a49321889c1f868eb22bc428
+
+Equation 4)
+C ^ D = CD
+CD = C xor D
+C xor CD = C xor (C xor D) --> Multiply by C in both side
+C xor CD = (C xor C) xor D --> Associative X ^ (Y ^ Z) = (X ^ Y) ^ Z and Self Inverse ( X ^ X = 0)
+C xor CD = 0 xor D --> Identity element (0 ^ D = D)
+C xor CD = D
+C = c7dd292859609aff68bea47262516874a49321889c1f868eb22bc428
+CD = 996e59a867c171397fc8342b5f9a61d90bda51403ff6326303cb865a
+D = C xor CD = c7dd292859609aff68bea47262516874a49321889c1f868eb22bc428 xor 996e59a867c171397fc8342b5f9a61d90bda51403ff6326303cb865a
+D = 5eb370803ea1ebc6177690593dcb09adaf4970c8a3e9b4edb1e04272
+
+Equation 3)
+A ^ D ^ E = ADE
+ADE = A xor D xor E
+ADE = AD xor E
+AD xor ADE = AD xor (AD xor E)
+AD xor ADE = (AD xor AD) xor E
+AD xor ADE = 0 xor E
+AD xor ADE = E
+A = 5dcec311ab1a88ff66b69ef46d4aba1aee814fe00a4342055c146533
+D = 5eb370803ea1ebc6177690593dcb09adaf4970c8a3e9b4edb1e04272
+AD = A xor D = 5dcec311ab1a88ff66b69ef46d4aba1aee814fe00a4342055c146533 xor 5eb370803ea1ebc6177690593dcb09adaf4970c8a3e9b4edb1e04272
+AD = 37db39195bb633971c00ead5081b3b741c83f28a9aaf6e8edf42741
+ADE = 7b33428eb14e4b54f2f4a3acaeab1c2733e4ab6bebc68436177128eb
+E = AD xor ADE = 37db39195bb633971c00ead5081b3b741c83f28a9aaf6e8edf42741 xor 7b33428eb14e4b54f2f4a3acaeab1c2733e4ab6bebc68436177128eb
+E = 784ef11f24f5286d8334ad01fe2aaf90722c9443426c72defa850faa
+
+Equation 2)
+B ^ C ^ E = BCE
+BCE = B xor C xor E 
+BCE = B xor CE
+BCE = CE xor B
+CE xor BCE = CE xor (CE xor B)
+CE xor BCE = (CE xor CE) xor B
+CE xor BCE = 0 xor B
+CE xor BCE = B
+C = c7dd292859609aff68bea47262516874a49321889c1f868eb22bc428
+E = 784ef11f24f5286d8334ad01fe2aaf90722c9443426c72defa850faa
+CE = bf93d8377d95b292eb8a09739c7bc7e4d6bfb5cbde73f45048aecb82
+BCE = 557ce6335808f3b812ce31c7230ddea9fb32bbaeaf8f0d4a540b4f05
+B = CE xor BCE = bf93d8377d95b292eb8a09739c7bc7e4d6bfb5cbde73f45048aecb82 xor 557ce6335808f3b812ce31c7230ddea9fb32bbaeaf8f0d4a540b4f05
+B = eaef3e04259d412af94438b4bf76194d2d8d0e6571fcf91a1ca58487
+
+
+With the discovered variables A, B, C, D and E then now we are ready to discover the Flag = F in the equation 5
+
+
+A = 5dcec311ab1a88ff66b69ef46d4aba1aee814fe00a4342055c146533
+B = eaef3e04259d412af94438b4bf76194d2d8d0e6571fcf91a1ca58487
+C = c7dd292859609aff68bea47262516874a49321889c1f868eb22bc428
+D = 5eb370803ea1ebc6177690593dcb09adaf4970c8a3e9b4edb1e04272
+E = 784ef11f24f5286d8334ad01fe2aaf90722c9443426c72defa850faa
+
+
+Equation 5)
+
+F ^ A ^ B ^ C ^ D ^ E  = FABCDE
+FABCDE = ABCDE xor F
+ABCDE xor FABCDE = ABCDE xor (ABCDE xor F)
+ABCDE xor FABCDE = (ABCDE xor ABCDE) xor F
+ABCDE xor FABCDE = 0 xor F
+ABCDE xor FABCDE = F
+ABCDE = 560155a2cdb39081630e3f6a738c6d1ebafa84860625fba2b9ff6844
+FABCDE = 306d34c5b6dda0f53c7a0f5a2ce4596cfea5ecb676169dd7d5931139
+F = ABCDE xor FABCDE = 560155a2cdb39081630e3f6a738c6d1ebafa84860625fba2b9ff6844 xor 306d34c5b6dda0f53c7a0f5a2ce4596cfea5ecb676169dd7d5931139
+
+F = 666c61677b6e30745f7430305f683472445f6830703366756c6c797d
+
+Then converting the flag F to ascii: 
+
+F = }ylluf3p0h_Dr4h_00t_t0n{galf
+
+Writing the flag on reversed order:
+
+F = flag{n0t_t00_h4rD_h0p3fully}
+
