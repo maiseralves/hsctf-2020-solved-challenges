@@ -12,11 +12,13 @@ Flag ^ Key 1 ^ Key 2 ^ Key 3 ^ Key 4 ^ Key 5 = 306d34c5b6dda0f53c7a0f5a2ce4596cf
 Author: AC
 
 =====================================================
-Resolution
+Solution
 =====================================================
 
 Online tools used to solve this chall:
+To calculate hex string Xors
 https://toolslick.com/math/bitwise/xor-calculator
+To convert the hex to lower case
 https://convertcase.net/pt/
 
 
