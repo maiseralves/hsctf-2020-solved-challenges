@@ -1,0 +1,23 @@
+=====================================================
+AP Lab: English Language
+=====================================================
+
+The AP English Language activity will ask you to reverse a program about manipulating strings and arrays. Again, an output will be given where you have to reconstruct an input.
+
+Author: AC
+
+
+=====================================================
+Solution
+=====================================================
+
+We are implemented the untraspose() function
+
+and with this input located in the code:
+
+1dd3|y_3tttb5g`q]^dhn3j
+
+we do the reverse decode and got the flag:
+
+flag{n0t_t00_b4d_r1ght}
+
