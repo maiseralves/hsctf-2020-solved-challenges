@@ -1,0 +1,69 @@
+=====================================================
+Comments
+=====================================================
+I found this file on my Keith's computer... what could be inside?
+
+Author: AC
+
+Hint1:
+Look through the comments :eyes:
+
+Hint2:
+http://kb.winzip.com/help/winzip/help_comment.htm
+
+=====================================================
+Solution
+=====================================================
+
+References:
+https://www.cyberciti.biz/faq/bash-for-loop/
+https://www.computerhope.com/unix/zipnote.htm
+
+To solve this chall extract all zip files inside Comments.zip
+This will output these files:
+1.zip
+2.zip
+3.zip
+4.zip
+5.zip
+6.zip
+7.zip
+8.zip
+
+Using zipnote to read a comment attached on the Comments.zip
+
+zipnote Comments.zip
+
+the output will be like this:
+
+@ 1.zip
+f
+@ (comment above this line)
+@ (zip file comment below this line)
+
+$ note that the letter 'f' can be the first letter of the flag{}
+
+Repeating this command for each unziped file i.zip and renaming the Comments.zip to 0.zip
+
+We made this bash command to get the second line from zipnote output for each file i.zip 
+
+$ for file in $(ls -a *.zip | sort); do zipnote $file | head -2 | tail -1; done
+
+and the output is:
+f
+l
+a
+g
+{
+4
+n
+6
+}
+f
+
+
+The flag is:
+
+flag{4n6}
+
+
